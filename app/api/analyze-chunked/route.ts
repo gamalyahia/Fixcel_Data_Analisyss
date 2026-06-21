@@ -358,6 +358,7 @@ function generateSimpleTransformation(issue: any): any {
         column: issue.column,
       }
   }
+  
 }
 
-export { chunkedProcessorCache, chunkedRecommendationCache }
+export { chunkedProcessorCache, chunkedRecommendationCache } from "@/lib/chunked-cache"
