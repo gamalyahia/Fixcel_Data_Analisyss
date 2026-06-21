@@ -88,12 +88,19 @@ export const enhancedAuth = {
 }
 
 export { supabaseAuth as supabase }
-
 export const getAuthHeaders = async () => {
   try {
     const session = await supabaseAuth.auth.getSession()
     if (session.data.session?.access_token) {
       return { Authorization: `Bearer ${session.data.session.access_token}` }
+    }
+    // Fallback: read directly from localStorage
+    const key = Object.keys(localStorage).find(k => k.startsWith('sb-') && k.endsWith('-auth-token'))
+    if (key) {
+      const stored = JSON.parse(localStorage.getItem(key) || '{}')
+      if (stored.access_token) {
+        return { Authorization: `Bearer ${stored.access_token}` }
+      }
     }
     return {}
   } catch (error) {
