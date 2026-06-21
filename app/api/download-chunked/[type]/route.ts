@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createServerClient } from "@/lib/supabase"
-import { chunkedProcessorCache } from "../analyze-chunked/route"
+import { chunkedProcessorCache } from "@/lib/chunked-cache"
 
 export async function POST(request: NextRequest, { params }: { params: { type: string } }) {
   try {
